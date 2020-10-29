@@ -5,7 +5,7 @@
     </header>
     <main>
       <div class="article"
-           v-for="(item,index) in 10"
+           v-for="(item,index) in 20"
            :key="index">
         <h3 class="article__title">@基于Css Variable的主题切换完美解决方案</h3>
         <p class="article__time">2020-03-06 03:39</p>
