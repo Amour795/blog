@@ -18,7 +18,7 @@
 import moment from 'moment'
 
 export default {
-  name: 'header',
+  name: 'blogHeader',
 
   data() {
     return {
