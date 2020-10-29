@@ -24,7 +24,7 @@
         <span>WWW.AMOUR795.TOP</span>
       </li>
       <li>
-        <span>鄂ICP备20013875号</span>
+        <!-- <span>鄂ICP备20013875号</span> -->
       </li>
     </ul>
   </div>
