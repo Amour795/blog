@@ -28,7 +28,7 @@
 
 <script>
 import moment from 'moment'
-import { calendar } from './calendar'
+import { calendar } from '@utils/calendar'
 const weekListA = [
   '周一',
   '周二',

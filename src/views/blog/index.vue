@@ -15,18 +15,12 @@ export default {
 
   components: { articleList, articleMain },
 
-  props: {},
-
   data() {
     return {
 
     };
   },
-
-  computed: {},
-
-  watch: {},
-
+  
   created() { },
 
   methods: {}
