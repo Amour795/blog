@@ -41,14 +41,6 @@ export default {
     };
   },
 
-  computed: {},
-
-  watch: {},
-
-  created() {
-
-  },
-
   methods: {
     go(name) {
       this.$router.push({ name: name })
