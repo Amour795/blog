@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Button @click="$router.push({name: 'editArticle'})">创建文章</Button>
     <Table :columns="columns1"
            :data="articleList">
       <template slot-scope="{ row }"
