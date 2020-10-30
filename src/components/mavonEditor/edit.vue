@@ -2,7 +2,7 @@
 
 <template>
   <div class="editor-writing">
-    <mavonEditor v-model="value"
+    <mavonEditor v-model="text"
                  :toolbars="toolbars" />
   </div>
 </template>
@@ -16,9 +16,30 @@ export default {
 
   components: { mavonEditor },
 
+  model: {
+    prop: 'value',
+    event:'change'
+  },
+
+  props: {
+    value: {
+      type: String
+    }
+  },
+
+  computed: {
+    text: {
+      get () {
+        return this.value
+      },
+      set (v){
+       this.$emit('change',v)
+      }
+    }
+  },
+
   data() {
     return {
-      value: '',
       toolbars: {
         bold: true, // 粗体
         italic: true, // 斜体
@@ -56,11 +77,7 @@ export default {
       }
 
     };
-  },
-
-  created() { },
-
-  methods: {}
+  }
 };
 </script>
 

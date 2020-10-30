@@ -1,35 +1,62 @@
 <template>
   <div class="article-list">
     <header>
-      复制链接时间
+      {{details.title}}
     </header>
     <main>
-       <div>
-         <div>
-         <h4>标题</h4>
-       <div>
-         <span>复制链接</span>
-         <span>时间</span>
-       </div>
-       </div>
-      <editorPreview :article="article" />
-       </div>
+      <div>
+        <div>
+          <h4>{{details.title}}</h4>
+          <div>
+            <span>复制链接</span>
+            <span>{{details.createTime | dateFormat}}</span>
+          </div>
+        </div>
+        <editorPreview :article="details.content" />
+      </div>
     </main>
   </div>
 </template>
 
 <script>
 import editorPreview from '@components/mavonEditor/preview'
+import { getArticleById } from '@api/blog.js'
 export default {
   name: 'articleList',
 
+  model: {
+    prop: "info"
+  },
+
+  props: {
+    info: {
+      type: Object
+    }
+  },
   components: { editorPreview },
 
   data() {
     return {
-      article: '# 欢迎使用 Markdown在线编辑器 MdEditor **Markdown是一种轻量级的「标记语言」**'
+      details:{
+        content:''
+      }
     };
   },
+  methods: {
+    getInfo(indo) {
+      getArticleById({ id: indo.id }).then(res => {
+       this.details = res
+      })
+    }
+  },
+  watch: {
+    info: {
+      handler(v) {
+        this.getInfo(v)
+      },
+      deep: true
+    }
+  }
 };
 </script>
 
@@ -49,14 +76,15 @@ export default {
     align-items: center;
     font-family: MyNewFont;
     font-size: 18px;
+    color:#333;
   }
   main {
     height: calc(100% - 40px);
     overflow-y: scroll;
-    background:#ffffff;
-    >div{
+    background: #ffffff;
+    > div {
       width: 680px;
-    margin: 0 auto;
+      margin: 0 auto;
     }
   }
 }

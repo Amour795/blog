@@ -69,14 +69,12 @@ export default {
       }, 1000)
     },
     goTo(item) {
-      console.log(this.$route.name);
-      console.log(item.router);
       if (this.$route.name === item.router || this.disabled) return
+      this.$emit('click',item.router)
       this.disabled = true
       setTimeout(() => {
         this.disabled = false
       }, 1650)
-      this.$router.push({ name: item.router })
     }
   }
 };

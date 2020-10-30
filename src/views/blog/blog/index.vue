@@ -1,7 +1,7 @@
 <template>
   <div class="blog">
-    <articleList />
-    <articleMain />
+    <articleList @select="(v) => {data = v}" />
+    <articleMain v-model="data" />
   </div>
 </template>
 
@@ -11,25 +11,13 @@ import articleMain from './components/articleMain'
 export default {
   name: 'blog',
 
-  mixins: [],
-
   components: { articleList, articleMain },
-
-  props: {},
 
   data() {
     return {
-
+      data: {}
     };
-  },
-
-  computed: {},
-
-  watch: {},
-
-  created() { },
-
-  methods: {}
+  }
 };
 </script>
 
@@ -38,6 +26,6 @@ export default {
   height: 100%;
   padding: 32px;
   display: flex;
-  background-color: #A7BFCB;
+  background-color: #a7bfcb;
 }
 </style>

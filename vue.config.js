@@ -11,6 +11,5 @@ module.exports = {
     config.resolve.alias.set('@api', resolve('src/api'))
     config.resolve.alias.set('@utils', resolve('src/utils'))
     config.resolve.alias.set('@components', resolve('src/components'))
-    
   }
 }

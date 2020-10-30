@@ -53,6 +53,7 @@ export default {
     async login() {
       let res = await userLogin(this.userInfo)
       console.log(res);
+      this.$router.push({name:'main'})
     }
   }
 };

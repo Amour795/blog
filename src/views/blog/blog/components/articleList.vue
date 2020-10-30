@@ -5,39 +5,44 @@
     </header>
     <main>
       <div class="article"
-           v-for="(item,index) in 20"
-           :key="index">
-        <h3 class="article__title">@基于Css Variable的主题切换完美解决方案</h3>
-        <p class="article__time">2020-03-06 03:39</p>
+           v-for="(item,index) in articleList"
+           :key="index"
+           @click="select(item)" 
+           :style="{'background':article.id === item.id ? '#F0ECBC':''}"
+           >
+        <h3 class="article__title">@{{item.title}}</h3>
+        <p class="article__time">{{item.createTime | dateFormat}}</p>
       </div>
     </main>
   </div>
 </template>
 
 <script>
+import { getArticleList } from '@api/blog.js'
 
 export default {
   name: 'articleList',
 
-  mixins: [],
-
-  components: {},
-
-  props: {},
-
   data() {
     return {
-
+      articleList: [],
+      article:{}
     };
   },
 
-  computed: {},
+  created() {
+    getArticleList().then(res => {
+      this.articleList = res
+      this.select(res[0])
+    })
+  },
 
-  watch: {},
-
-  created() { },
-
-  methods: {}
+  methods: {
+    select(item){
+      this.article = item
+      this.$emit('select',item)
+    }
+  },
 };
 </script>
 
@@ -59,18 +64,21 @@ export default {
     font-family: MyNewFont;
     font-weight: bold;
     font-size: 18px;
+    color:#333;
   }
   main {
-    background:#ffffff;
+    background: #ffffff;
     height: calc(100% - 40px);
     overflow-y: scroll;
+    padding:8px;
     .article {
-      // height: 42px;
       padding: 12px;
+      cursor: pointer;
+          border-radius: 14px;
       &__title {
         font-family: MyNewFont;
         font-size: 18px;
-        margin-bottom: 12px;
+        margin-bottom: 8px;
         color: #333333;
       }
       &__time {
