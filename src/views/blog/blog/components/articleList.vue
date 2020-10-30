@@ -52,7 +52,7 @@ export default {
   flex: none;
   header {
     height: 40px;
-    background: #d2d2d2;
+    background: rgb(0 0 0 / 20%);
     display: flex;
     justify-content: center;
     align-items: center;

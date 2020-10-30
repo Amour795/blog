@@ -1,13 +1,13 @@
 <template>
-  <div id="app">
+  <div id="admin">
     <router-view />
   </div>
 </template>
 
+
 <style lang="scss" scoped>
-#app {
+#admin {
   width: 100%;
   height: 100%;
 }
 </style>
-

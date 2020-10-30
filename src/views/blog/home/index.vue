@@ -75,7 +75,7 @@ export default {
       position: relative;
       left: -100%;
       animation: mymove 0.6s;
-      animation-delay: 1.6s;
+      animation-delay: 1.4s;
       animation-fill-mode: both;
     }
     > span::before {
@@ -88,7 +88,7 @@ export default {
       top: 0;
       bottom: 0;
       animation: mymove1 0.6s;
-      animation-delay: 2.2s;
+      animation-delay: 2s;
       animation-fill-mode: both;
     }
     &__cursor {
@@ -101,7 +101,7 @@ export default {
       transform: translateY(-50%);
       right: -8px;
       animation: mymove2 1s infinite;
-      animation-delay: 3s;
+      animation-delay: 2.8s;
     }
 
     @keyframes mymove {
@@ -152,7 +152,7 @@ export default {
       border-bottom: 1px solid #333;
       border-right: 1px solid #333;
       justify-content: center;
-        line-height: 100px;
+      line-height: 100px;
       span:nth-child(1) {
         font-size: 24px;
         color: #F0ECBC;

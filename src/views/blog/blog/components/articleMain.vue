@@ -5,6 +5,7 @@
     </header>
     <main>
        <div>
+         <div>
          <h4>标题</h4>
        <div>
          <span>复制链接</span>
@@ -12,6 +13,7 @@
        </div>
        </div>
       <editorPreview :article="article" />
+       </div>
     </main>
   </div>
 </template>
@@ -39,10 +41,9 @@ export default {
   border-radius: 10px;
   border: 1px solid #666666;
   overflow: hidden;
-    background:#ffffff;
   header {
     height: 40px;
-    background: #d2d2d2;
+    background: rgb(0 0 0 / 20%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,9 +53,11 @@ export default {
   main {
     height: calc(100% - 40px);
     overflow-y: scroll;
-    width: 680px;
-    margin: 0 auto;
     background:#ffffff;
+    >div{
+      width: 680px;
+    margin: 0 auto;
+    }
   }
 }
 </style>

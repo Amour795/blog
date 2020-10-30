@@ -8,7 +8,7 @@
       </ul>
       <div class="blog-header__content-time"
            v-if="hour >= 0 && minute >= 0 &&second >= 0">
-        {{hour}}:{{minute}}:{{second}}
+      <p>{{hour}}:{{minute}}:{{second}}</p>
       </div>
     </div>
   </div>
@@ -42,6 +42,11 @@ export default {
           router: 'demo',
           name: 'Demo',
           active: false,
+        },
+        {
+          router: 'login',
+          name: '登录',
+          active: false,
         }
       ],
       disabled: false,
@@ -64,6 +69,8 @@ export default {
       }, 1000)
     },
     goTo(item) {
+      console.log(this.$route.name);
+      console.log(item.router);
       if (this.$route.name === item.router || this.disabled) return
       this.disabled = true
       setTimeout(() => {
