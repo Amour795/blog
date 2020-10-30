@@ -1,0 +1,95 @@
+<template>
+  <div>
+    <p class="title">新增文章</p>
+    <Form ref="formData"
+          :model="formData"
+          :label-width="80">
+      <FormItem label="标题">
+        <Input v-model="formData.title"
+               placeholder="标题" />
+      </FormItem>
+      <FormItem label="标题">
+        <div style="height: 320px;overflow-y: scroll;box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 12px 0px;">
+          <editorEdit v-model="formData.content" />
+        </div>
+      </FormItem>
+      <FormItem label="标题">
+        <Select v-model="formData.tag"
+                filterable
+                multiple
+                allow-create
+                @on-create="handleCreate">
+          <Option v-for="item in list"
+                  :value="item.value"
+                  :key="item.value">{{ item.label }}</Option>
+        </Select>
+      </FormItem>
+      <Button @click="handleSubmit">发布</Button>
+      <Button>存草稿</Button>
+    </Form>
+  </div>
+</template>
+<script>
+import { saveBlog, getArticleById } from '@api/admin.js'
+import editorEdit from '@components/mavonEditor/edit'
+export default {
+  name: 'articleManage',
+  components: { editorEdit },
+  data() {
+    return {
+      list: [],
+      formData: {
+        title: '',
+        content: '',
+        tag: [],
+        imgList: [2, 2, 2, 2],
+        mainImg: '11',
+        thumbnail: '11'
+      }
+    }
+  },
+  methods: {
+    handleSubmit() {
+      saveBlog(this.formData).then(res => {
+        res && this.$Message.success('文章发布成功');
+      })
+    },
+    handleCreate(val) {
+      this.list.push({
+        value: val,
+        label: val
+      });
+    },
+    getInfo() {
+      getArticleById({ id: this.$route.query.id }).then(res => {
+        this.formData = {
+          title: res.title,
+          content: res.content,
+          tag: res.tag,
+          imgList: res.imgList,
+          mainImg: res.mainImg,
+          thumbnail: res.thumbnail
+        }
+        this.list = res.tag.map(v => {
+          return {
+            value: v,
+            label: v,
+          }
+        })
+      })
+    }
+  },
+  created() {
+    this.$route.query.id && this.getInfo()
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.title {
+  font-size: 24px;
+  font-family: NewFont;
+  padding: 24px 0;
+}
+</style>
+
