@@ -5,6 +5,10 @@
     <Table :columns="columns1"
            :data="articleList">
       <template slot-scope="{ row }"
+                slot="title">
+        {{row.title}}<Tag style="margin-left: 8px;" v-if="row.publish" color="orange">草稿</Tag>
+      </template>
+      <template slot-scope="{ row }"
                 slot="createTime">
         {{row.createTime | dateFormat('YYYY-MM-DD HH:mm:ss')}}
       </template>
@@ -36,7 +40,7 @@ export default {
       columns1: [
         {
           title: '标题',
-          key: 'title'
+          slot: 'title',
         },
         {
           title: '创建时间',
