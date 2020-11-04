@@ -56,7 +56,6 @@ app.use(koa_jwt({
     secret: 'Amour795'
 }).unless({
     path: [/\/user/, /\/article/]
-    // 
 }));
 
 app.use(router.routes())

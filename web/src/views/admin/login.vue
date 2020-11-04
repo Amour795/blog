@@ -7,7 +7,7 @@
              type="text"
              placeholder="用户名"><br>
       <input v-model="userInfo.password"
-             type="text"
+             type="password"
              placeholder="密码"><br>
       <div class="admin-login__box-btn">
         <button @click="$router.push({name:'home'})">离开</button>

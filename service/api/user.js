@@ -49,7 +49,7 @@ router.post('/login', async (ctx) => {
                             date: new Date().getTime()
                         }
                         // 签发Token 1小时后过期
-                        const token = jwt.sign(userToken, 'Amour795', { expiresIn: '1h' })
+                        const token = jwt.sign(userToken, 'Amour795', { expiresIn: '2h' })
                         jwt.sign({}, 'Amour795')
                         ctx.body = {
                             userName: result.userName,
