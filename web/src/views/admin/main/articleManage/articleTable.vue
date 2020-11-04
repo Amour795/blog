@@ -1,8 +1,13 @@
 <template>
   <div>
-    <Button style="margin: 24px 0;" @click="$router.push({name: 'editArticle'})">创建文章</Button>
+    <Button style="margin: 24px 0;"
+            @click="$router.push({name: 'editArticle'})">创建文章</Button>
     <Table :columns="columns1"
            :data="articleList">
+      <template slot-scope="{ row }"
+                slot="createTime">
+        {{row.createTime | dateFormat('YYYY-MM-DD HH:mm:ss')}}
+      </template>
       <template slot-scope="{ row }"
                 slot="handle">
         <Button type="text"
@@ -35,7 +40,7 @@ export default {
         },
         {
           title: '创建时间',
-          key: 'createTime'
+          slot: 'createTime',
         },
         {
           title: '操作',

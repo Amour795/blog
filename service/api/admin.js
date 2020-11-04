@@ -61,6 +61,7 @@ router.get('/getArticleList', async (ctx) => {
                 imgList: v.imgList,
                 tag: v.tag,
                 title: v.title,
+                publish:v.publish
             }
         })
     } catch (error) {
@@ -82,6 +83,7 @@ router.get('/getArticleById', async (ctx) => {
                 imgList: v.imgList,
                 tag: v.tag,
                 title: v.title,
+                publish:v.publish
             }
         })[0]
     } catch (error) {

@@ -64,6 +64,7 @@ export default {
     },
     getInfo() {
       getArticleById({ id: this.$route.query.id }).then(res => {
+        if (!res) return
         this.formData = res
         this.list = res.tag.map(v => {
           return {

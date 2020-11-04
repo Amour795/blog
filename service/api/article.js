@@ -15,7 +15,7 @@ router.get('/getArticleList', async (ctx) => {
                 updateTime: v.updateTime,
                 imgList: v.imgList,
                 tag: v.tag,
-                title: v.title,
+                title: v.title
             }
         })
     } catch (error) {
@@ -36,7 +36,7 @@ router.get('/getArticleById', async (ctx) => {
                 updateTime: v.updateTime,
                 imgList: v.imgList,
                 tag: v.tag,
-                title: v.title,
+                title: v.title
             }
         })[0]
     } catch (error) {
