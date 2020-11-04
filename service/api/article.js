@@ -6,7 +6,7 @@ const mongoose = require('mongoose')
 router.get('/getArticleList', async (ctx) => {
     try {
         const Article = mongoose.model('Article')
-        let result = await Article.find().exec()
+        let result = await Article.find({ publish: false }).exec()
         ctx.body = result.map(v => {
             return {
                 id: v._id,
@@ -43,5 +43,7 @@ router.get('/getArticleById', async (ctx) => {
         ctx.body = { code: 500, message: err }
     }
 })
+
+
 
 module.exports = router;

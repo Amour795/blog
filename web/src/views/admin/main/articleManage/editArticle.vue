@@ -24,8 +24,8 @@
                   :key="item.value">{{ item.label }}</Option>
         </Select>
       </FormItem>
-      <Button @click="handleSubmit">发布</Button>
-      <Button>存草稿</Button>
+      <Button @click="handleSubmit(false)">发布</Button>
+      <Button @click="handleSubmit(true )">存草稿</Button>
     </Form>
   </div>
 </template>
@@ -42,14 +42,16 @@ export default {
         title: '',
         content: '',
         tag: [],
-        imgList: [2, 2, 2, 2],
-        mainImg: '11',
-        thumbnail: '11'
+        imgList: [],
+        mainImg: '',
+        thumbnail: '',
+        publish: false
       }
     }
   },
   methods: {
-    handleSubmit() {
+    handleSubmit(publish) {
+      this.formData.publish = publish
       saveBlog(this.formData).then(res => {
         res && this.$Message.success('文章发布成功');
       })
@@ -62,14 +64,7 @@ export default {
     },
     getInfo() {
       getArticleById({ id: this.$route.query.id }).then(res => {
-        this.formData = {
-          title: res.title,
-          content: res.content,
-          tag: res.tag,
-          imgList: res.imgList,
-          mainImg: res.mainImg,
-          thumbnail: res.thumbnail
-        }
+        this.formData = res
         this.list = res.tag.map(v => {
           return {
             value: v,

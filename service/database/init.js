@@ -6,8 +6,7 @@ const { resolve } = require('path')
 exports.initSchemas = () => {
     glob.sync(resolve(__dirname, './schema/', '**/*.js')).forEach(require)
 }
-let options =
-{
+let options = {
     authSource: 'admin',
     auto_reconnect: true,
     user: process.env.MONGONAME,

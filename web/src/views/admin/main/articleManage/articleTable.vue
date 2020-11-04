@@ -1,12 +1,10 @@
 <template>
   <div>
-    <Button @click="$router.push({name: 'editArticle'})">创建文章</Button>
+    <Button style="margin: 24px 0;" @click="$router.push({name: 'editArticle'})">创建文章</Button>
     <Table :columns="columns1"
            :data="articleList">
       <template slot-scope="{ row }"
                 slot="handle">
-        <Button type="text"
-                @click="handleDetails(row)">详情</Button>
         <Button type="text"
                 @click="handleDelete(row)">删除</Button>
         <Button type="text"
@@ -17,7 +15,7 @@
 </template>
 
 <script>
-import { getArticleList } from '@api/admin.js'
+import { getArticleList, deleteArticleById } from '@api/admin.js'
 
 export default {
   name: '',
@@ -53,27 +51,19 @@ export default {
   watch: {},
 
   created() {
-    getArticleList().then(res => {
-      this.articleList = res
-    })
+    this.getList()
   },
 
   methods: {
-    handleDetails(item) {
-      this.$router.push({
-        name: 'editArticle',
-        query: {
-          id: item.id
-        }
+    getList() {
+      getArticleList().then(res => {
+        this.articleList = res
       })
     },
-    handleDelete(item) {
-      this.$router.push({
-        name: 'editArticle',
-        query: {
-          id: item.id
-        }
-      })
+    async handleDelete(item) {
+      let res = await deleteArticleById({ id: item.id })
+      res && this.$Message.success('删除成功')
+      this.getList()
     },
     handleEdit(item) {
       this.$router.push({
