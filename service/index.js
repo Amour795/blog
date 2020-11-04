@@ -55,7 +55,7 @@ app.use(async (ctx, next) => {
 app.use(koa_jwt({
     secret: 'Amour795'
 }).unless({
-    path: [/\/login/, /\/article/]
+    path: [/\/user/, /\/article/]
     // 
 }));
 
