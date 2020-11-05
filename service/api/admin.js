@@ -52,7 +52,6 @@ router.get('/getArticleList', async (ctx) => {
     try {
         const Article = mongoose.model('Article')
         let result = await Article.find().exec()
-        console.log(result);
         ctx.body = result.map(v => {
             return {
                 id: v._id,

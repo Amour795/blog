@@ -59,7 +59,6 @@ export default {
 
   created() {
     this.countdown()
-    console.log(this.$route.name);
   },
 
   methods: {

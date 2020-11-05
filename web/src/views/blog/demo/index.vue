@@ -130,7 +130,6 @@ export default {
       const week = Number(new Date(`${year}/${month}/1`).getDay())
       // 周日显示在前面还是后面
       const front = this.weekType ? week : week ? week - 1 : 6
-      console.log(front);
       // 后面天数取余数
       const behind = (days + front) % 7 ? 7 - (days + front) % 7 : 0
       // 沾满所有格子所需的天数 加上前面和后面的天数

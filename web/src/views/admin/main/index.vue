@@ -60,7 +60,6 @@ export default {
   watch: {},
 
   created() { 
-    console.log();
   },
 
   methods: {}

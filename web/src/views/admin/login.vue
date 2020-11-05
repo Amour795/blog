@@ -49,15 +49,16 @@ export default {
   methods: {
     async submit() {
       let res = await userRegister(this.userInfo)
-      console.log(res);
+      res && this.$Message.success('注册成功')
+      this.login()
     },
     async login() {
       let res = await userLogin(this.userInfo)
       if (res.status) {
         localStorage.setItem('TOKEN', res.token)
         this.$router.push({ name: 'main' })
-      }else{
-          this.$Message.error(res.message)
+      } else {
+        this.$Message.error(res.message)
       }
     }
   }
