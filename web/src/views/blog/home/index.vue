@@ -1,6 +1,9 @@
 
 <template>
   <div class="blog-home">
+    <Upload action="http://localhost:3000/files/uploadFiles">
+        <Button icon="ios-cloud-upload-outline">Upload files</Button>
+    </Upload>
     <!-- <button @click="go('login')">login</button>
     <button @click="go('calendar')">calendar</button> -->
     <div class="blog-home-welcome-msg">
@@ -27,6 +30,7 @@
         <span>鄂ICP备20013875号</span>
       </li>
     </ul>
+     
   </div>
 </template>
 

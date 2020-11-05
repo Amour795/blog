@@ -1,7 +1,9 @@
 const Koa = require('koa')
 const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken')
+const path = require('path')
 const koa_jwt = require('koa-jwt')
+const serve = require('koa-static')
 const { connect, initSchemas } = require('./database/init.js')
 const app = new Koa()
     //立即执行函数
@@ -19,13 +21,14 @@ app.use(cors())
 const Router = require('koa-router')
 let router = new Router();
 
-
 let user = require('./api/user.js')
 let article = require('./api/article.js');
 let admin = require('./api/admin.js');
+let files = require('./api/files.js');
 router.use('/user', user.routes())
     .use('/article', article.routes())
     .use('/admin', admin.routes())
+    .use('/files', files.routes())
 // jwt 鉴权登录超时
 app.use(async (ctx, next) => {
     var token = ctx.headers.authorization;
@@ -55,12 +58,12 @@ app.use(async (ctx, next) => {
 app.use(koa_jwt({
     secret: 'Amour795'
 }).unless({
-    path: [/\/user/, /\/article/]
+    path: [/\/user/, /\/article/, /\/files/, /\/upload/]
 }));
 
 app.use(router.routes())
-app.use(router.allowedMethods())
-
+    .use(serve(path.join(__dirname)))
+    .use(router.allowedMethods())
 
 app.listen(3000, () => {
     console.log('[Server] starting at port 3000')
