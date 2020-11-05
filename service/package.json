@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index",
     "build:docker": "docker build -t amour795/koa2 .",
-    "run:docker": "docker run -p 3000:3000 --env MONGODB=mongodb://172.17.0.2/blog --env  MONGONAME=root --env  MONGOPWD=Amour795 -d --name koa2  amour795/koa2"
+    "run:docker": "docker run -p 3000:3000 --env MONGODB=mongodb://172.17.0.2/blog --env  MONGONAME=root --env  MONGOPWD=Amour795 -v /Users/amour795/Desktop/img:/app/upload -d --name koa2  amour795/koa2"
   },
   "keywords": [],
   "author": "",
@@ -23,6 +23,7 @@
     "koa-router": "^9.4.0",
     "koa-static": "^5.0.0",
     "koa2-cors": "^2.0.6",
-    "mongoose": "^5.10.11"
+    "mongoose": "^5.10.11",
+    "moment": "^2.29.1"
   }
 }

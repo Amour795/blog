@@ -2,8 +2,8 @@
 const Router = require('koa-router')
 const fs = require('fs');
 const path = require('path')
-const serve = require('koa-static')
 const koaBody = require('koa-body')
+const moment = require('moment')
 let router = new Router()
 
 router.post('/uploadFiles',
@@ -16,9 +16,9 @@ router.post('/uploadFiles',
   , async (ctx) => {
     try {
       // 上传单个文件
-      console.log(ctx.request.files);
       const file = ctx.request.files.file; // 获取上传文件
-      let filePath = path.join('./upload', file.name)
+      let newFileName = `${moment(new Date()).format('YYYY-M-D k:m:s')}-${Math.floor(Math.random()*1000)}.${file.name.split('.').pop().toLowerCase()}`
+      let filePath = path.join('./upload', newFileName)
       // 创建可读流
       const reader = fs.createReadStream(file.path);
       // 创建可写流
@@ -26,7 +26,7 @@ router.post('/uploadFiles',
       const pro = new Promise((resolve, reject) => {
         var stream = reader.pipe(upStream);
         stream.on('finish', function () {
-          resolve(`http://localhost:3000/upload/${file.name}`);
+          resolve(`http://localhost:3000/upload/${newFileName}`);
         });
       })
       return ctx.body = {

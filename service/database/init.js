@@ -1,16 +1,22 @@
+
 const mongoose = require('mongoose')
-const db = process.env.MONGODB
 const glob = require('glob')
 const { resolve } = require('path')
 //引入所有的Schema文件
 exports.initSchemas = () => {
     glob.sync(resolve(__dirname, './schema/', '**/*.js')).forEach(require)
 }
+let info = {
+    MONGODB: "mongodb://localhost/smile-db",
+    MONGONAME: "root",
+    MONGOPWD: "Amour795",
+}
+const db = process.env.MONGODB || info.MONGODB  //process.env.MONGODB
 let options = {
     authSource: 'admin',
     auto_reconnect: true,
-    user: process.env.MONGONAME,
-    pass: process.env.MONGOPWD,
+    user: process.env.MONGONAME || info.MONGONAME, // process.env.MONGONAME,
+    pass: process.env.MONGOPWD || info.MONGOPWD,// process.env.MONGOPWD,
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true
