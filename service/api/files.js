@@ -26,7 +26,7 @@ router.post('/uploadFiles',
       const pro = new Promise((resolve, reject) => {
         var stream = reader.pipe(upStream);
         stream.on('finish', function () {
-          resolve(`http://localhost:3000/upload/${newFileName}`);
+          resolve(`http://${process.env.MONGODB}/upload/${newFileName}`);
         });
       })
       return ctx.body = {

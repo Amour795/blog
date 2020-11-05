@@ -1,10 +1,10 @@
-FROM node:12
+FROM node:latest
 WORKDIR /app
 COPY package*.json ./
 COPY . .
-ENV MONGODB="mongodb://172.17.0.2/smile-db"
-ENV MONGONAME="admin"
-ENV MONGOPWD="admin"
+ENV MONGODB=''
+ENV MONGONAME=""
+ENV MONGOPWD=""
 RUN npm install --registry=https://registry.npm.taobao.org
 EXPOSE 3000
 CMD ["npm","start"]

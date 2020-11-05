@@ -5,7 +5,7 @@ function resolve (dir) {
 }
 
 module.exports = {
-  chainWebpack:config=>{
+  chainWebpack: config => {
     config.resolve.alias.set('@', resolve('src'))
     config.resolve.alias.set('@views', resolve('src/views'))
     config.resolve.alias.set('@api', resolve('src/api'))

@@ -1,10 +1,9 @@
-
 import axios from 'axios'
 
 // 创建axios实例
 const service = axios.create({
   // api的base_url
-  baseURL:  process.env.APIURL || 'http://localhost:3000/',
+  baseURL: process.env.VUE_APP_BASE_URL,
   // 请求超时时间
   timeout: 10000
 })
@@ -12,7 +11,7 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     if (localStorage.getItem('TOKEN')) {
-      config.headers['Authorization'] = 'Bearer ' + localStorage.getItem('TOKEN') 
+      config.headers['Authorization'] = 'Bearer ' + localStorage.getItem('TOKEN')
     }
     return config
   },
@@ -40,10 +39,10 @@ class HTTP {
   constructor(baseURL) {
     this.baseURL = baseURL
   }
-  get(url, param) {
+  get (url, param) {
     return service.get(url, { params: param, baseURL: this.baseURL })
   }
-  post(url, params, config = {}) {
+  post (url, params, config = {}) {
     return service.post(url, params, { baseURL: this.baseURL, ...config })
   }
 }
