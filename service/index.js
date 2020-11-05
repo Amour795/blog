@@ -25,10 +25,10 @@ let user = require('./api/user.js')
 let article = require('./api/article.js');
 let admin = require('./api/admin.js');
 let files = require('./api/files.js');
-router.use('/user', user.routes())
-    .use('/article', article.routes())
-    .use('/admin', admin.routes())
-    .use('/files', files.routes())
+router.use('/api/user', user.routes())
+    .use('/api/article', article.routes())
+    .use('/api/admin', admin.routes())
+    .use('/api/files', files.routes())
 // jwt 鉴权登录超时
 app.use(async (ctx, next) => {
     var token = ctx.headers.authorization;

@@ -5,6 +5,6 @@ COPY . .
 ENV MONGODB=''
 ENV MONGONAME=""
 ENV MONGOPWD=""
-RUN npm install --registry=https://registry.npm.taobao.org
+RUN npm install
 EXPOSE 3000
 CMD ["npm","start"]

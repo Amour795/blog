@@ -3,7 +3,7 @@ const axios = new HTTP()
 
 
 export const userLogin = data =>
-axios.post('/user/login', data)
+  axios.post('/api/user/login', data)
 
 export const userRegister = data =>
-axios.post('/user/register', data)
+  axios.post('/api/user/register', data)

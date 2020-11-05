@@ -3,13 +3,13 @@ const axios = new HTTP()
 
 
 export const saveBlog = data =>
-axios.post('/admin/save', data)
+  axios.post('/api/admin/save', data)
 
 export const getArticleList = data =>
-axios.get('/admin/getArticleList', data)
+  axios.get('/api/admin/getArticleList', data)
 
 export const getArticleById = data =>
-axios.get('/admin/getArticleById', data)
+  axios.get('/api/admin/getArticleById', data)
 
 export const deleteArticleById = data =>
-axios.post('/admin/deleteArticleById', data)
+  axios.post('/api/admin/deleteArticleById', data)
