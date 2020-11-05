@@ -3,12 +3,15 @@
 <template>
   <div class="editor-writing">
     <mavonEditor v-model="text"
+                 ref="md"
+                 @imgAdd="$imgAdd"
                  :toolbars="toolbars" />
   </div>
 </template>
 
 <script>
 import { mavonEditor } from 'mavon-editor'
+import { uploadFiles } from '@api/upload'
 import 'mavon-editor/dist/css/index.css'
 
 export default {
@@ -18,7 +21,7 @@ export default {
 
   model: {
     prop: 'value',
-    event:'change'
+    event: 'change'
   },
 
   props: {
@@ -29,11 +32,11 @@ export default {
 
   computed: {
     text: {
-      get () {
+      get() {
         return this.value
       },
-      set (v){
-       this.$emit('change',v)
+      set(v) {
+        this.$emit('change', v)
       }
     }
   },
@@ -77,6 +80,17 @@ export default {
       }
 
     };
+  },
+
+  methods: {
+    $imgAdd(pos, $file) {
+      // 第一步.将图片上传到服务器.
+      var formdata = new FormData();
+      formdata.append('file', $file);
+      uploadFiles(formdata).then(res => {
+        this.$refs.md.$img2Url(pos, res.url);
+      })
+    }
   }
 };
 </script>

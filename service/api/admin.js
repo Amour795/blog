@@ -8,8 +8,8 @@ router.post('/save', async (ctx) => {
     const Article = mongoose.model('Article')
     //把从前端接收的POST数据封装成一个新的user对象
     let newUArticle = new Article(ctx.request.body)
-    let { id, title, content, tag, imgList, mainImg, thumbnail, publish } = ctx.request.body
-    if (id) {
+    if (ctx.request.body.id) {
+        let { id, title, content, tag, imgList, mainImg, thumbnail, publish } = ctx.request.body
         await Article.findOne({ '_id': id }).exec().then(async (result) => {
             if (result) {
                 await Article.updateOne({ '_id': id }, {
@@ -52,6 +52,7 @@ router.get('/getArticleList', async (ctx) => {
     try {
         const Article = mongoose.model('Article')
         let result = await Article.find().exec()
+        console.log(result);
         ctx.body = result.map(v => {
             return {
                 id: v._id,
@@ -61,7 +62,7 @@ router.get('/getArticleList', async (ctx) => {
                 imgList: v.imgList,
                 tag: v.tag,
                 title: v.title,
-                publish:v.publish
+                publish: v.publish
             }
         })
     } catch (error) {
@@ -83,7 +84,7 @@ router.get('/getArticleById', async (ctx) => {
                 imgList: v.imgList,
                 tag: v.tag,
                 title: v.title,
-                publish:v.publish
+                publish: v.publish
             }
         })[0]
     } catch (error) {

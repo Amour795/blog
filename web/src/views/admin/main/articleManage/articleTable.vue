@@ -6,7 +6,9 @@
            :data="articleList">
       <template slot-scope="{ row }"
                 slot="title">
-        {{row.title}}<Tag style="margin-left: 8px;" v-if="row.publish" color="orange">草稿</Tag>
+        {{row.title}}<Tag style="margin-left: 8px;"
+             v-if="row.publish"
+             color="orange">草稿</Tag>
       </template>
       <template slot-scope="{ row }"
                 slot="createTime">
@@ -14,10 +16,13 @@
       </template>
       <template slot-scope="{ row }"
                 slot="handle">
-        <Button type="text"
-                @click="handleDelete(row)">删除</Button>
-        <Button type="text"
-                @click="handleEdit(row)">编辑</Button>
+        <Poptip confirm
+                transfer
+                title="确认删除此文章吗?"
+                @on-ok="handleDelete(row)">
+          <Button type="error">删除</Button>
+        </Poptip>
+        <Button type="info" style="margin-left: 24px;" @click="handleEdit(row)">编辑</Button>
       </template>
     </Table>
   </div>

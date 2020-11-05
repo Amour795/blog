@@ -42,7 +42,6 @@ export default {
         title: '',
         content: '',
         tag: [],
-        imgList: [],
         mainImg: '',
         thumbnail: '',
         publish: false

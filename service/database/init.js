@@ -7,7 +7,7 @@ exports.initSchemas = () => {
     glob.sync(resolve(__dirname, './schema/', '**/*.js')).forEach(require)
 }
 let info = {
-    MONGODB: "mongodb://localhost/smile-db",
+    MONGODB: "mongodb://localhost/blog",
     MONGONAME: "root",
     MONGOPWD: "Amour795",
 }

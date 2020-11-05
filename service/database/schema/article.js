@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')    //引入Mongoose
 const Schema = mongoose.Schema          //声明Schema
 let ObjectId = Schema.Types.ObjectId    //声明Object类型
-//创建我们的用户Schema
 const articleSchema = new Schema({
     articleId: ObjectId,
     title: String,
@@ -9,10 +8,9 @@ const articleSchema = new Schema({
     updateTime: { type: Date, default: Date.now() },
     content: String,
     tag: Array,
-    imgList: Array,
     mainImg: String,
     thumbnail: String,
-    publish: { type: Boolean, default: false }
+    publish: { type: Boolean, default: false },
 })
 //发布模型
 mongoose.model('Article', articleSchema)
