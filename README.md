@@ -2,7 +2,7 @@
 
 - ###### Vue前端GitHub地址
 
-  [https://github.com/Amour795/blog]:https://github.com/Amour795/blog
+  [https://github.com/Amour795/blog]:GitHub
 
   web文件夹为前端文件其中包括Docker打包命令
 
@@ -10,7 +10,7 @@
 
 - ###### Koa后端GitHub地址
 
-  [https://github.com/Amour795/blog]:https://github.com/Amour795/blog
+  [https://github.com/Amour795/blog]:GitHub
 
   Server文件夹为后端文件其中包括Docker打包命令
 
