@@ -10,7 +10,7 @@ router.post('/uploadFiles',
   koaBody({
     multipart: true,
     formidable: {
-      maxFileSize: 200 * 1024 * 1024    // 设置上传文件大小最大限制，默认2M
+      maxFileSize: 2000 * 1024 * 1024    // 设置上传文件大小最大限制，默认2M
     }
   })
   , async (ctx) => {
@@ -26,7 +26,7 @@ router.post('/uploadFiles',
       const pro = new Promise((resolve, reject) => {
         var stream = reader.pipe(upStream);
         stream.on('finish', function () {
-          resolve(`http://${process.env.MONGODB}/upload/${newFileName}`);
+          resolve(`http://localhost:3002/upload/${newFileName}`);
         });
       })
       return ctx.body = {

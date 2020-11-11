@@ -7,21 +7,20 @@ exports.initSchemas = () => {
     glob.sync(resolve(__dirname, './schema/', '**/*.js')).forEach(require)
 }
 let info = {
-    MONGODB: "mongodb://192.168.31.67:27017/blog",
-    MONGONAME: "Amour795",
+    MONGODB: "mongodb://localhost:27017/blog",
+    MONGONAME: "root",
     MONGOPWD: "Amour795",
 }
 const db = process.env.MONGODB ? 'mongodb://' + process.env.MONGODB + '/blog' : info.MONGODB  //process.env.MONGODB
 let options = {
-    // authSource: 'admin',
-    // auto_reconnect: true,
-    // user: process.env.MONGONAME || info.MONGONAME, // process.env.MONGONAME,
-    // pass: process.env.MONGOPWD || info.MONGOPWD,// process.env.MONGOPWD,
+    authSource: 'admin',
+    auto_reconnect: true,
+    user: process.env.MONGONAME || info.MONGONAME, // process.env.MONGONAME,
+    pass: process.env.MONGOPWD || info.MONGOPWD,// process.env.MONGOPWD,
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true
 }
-console.log(db);
 
 //连接数据库
 exports.connect = () => {

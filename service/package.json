@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index",
     "build:docker": "docker build -t amour795/koa2 .",
-    "run:docker": "docker run -p 3000:3000 --env MONGODB=192.168.31.67:27017 --env  MONGONAME=Amour795 --env  MONGOPWD=Amour795 -v /Users/amour795/Desktop/img:/app/upload -d --name koa2  amour795/koa2"
+    "run:docker": "docker run -p 3000:3000 --env MONGODB=192.168.31.67:27017 --env  MONGONAME=Amour795 --env  MONGOPWD=Amour795 -v /Users/amour795/Desktop/img:/app/upload -d --name koa2  amour795/koa2",
+    "run:docker:mac": "docker run -p 3000:3000 --env MONGODB=172.17.0.2:27017 --env  MONGONAME=root --env  MONGOPWD=Amour795 -v /Users/amour795/Desktop/img:/app/upload -d --name koa2  amour795/koa2"
   },
   "keywords": [],
   "author": "",
@@ -27,5 +28,3 @@
     "moment": "^2.29.1"
   }
 }
-
-
