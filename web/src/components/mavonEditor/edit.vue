@@ -3,9 +3,10 @@
 <template>
   <div class="editor-writing">
     <mavonEditor v-model="text"
+                 :ishljs="true"
                  ref="md"
                  @imgAdd="$imgAdd"
-                 :toolbars="toolbars" />
+                 :toolbars="toolbars" codeStyle='atelier-seaside-dark'/>
   </div>
 </template>
 

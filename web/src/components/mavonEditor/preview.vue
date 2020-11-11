@@ -4,7 +4,8 @@
                  :subfield="false"
                  :boxShadow="false"
                  defaultOpen="preview"
-                 :toolbarsFlag="false" />
+                 :toolbarsFlag="false"  
+                 codeStyle='monokai'/>
   </div>
 </template>
 

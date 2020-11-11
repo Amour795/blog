@@ -5,13 +5,13 @@
     </header>
     <main>
       <div>
-        <div>
+        <!-- <div>
           <h4>{{details.title}}</h4>
           <div>
             <span>复制链接</span>
             <span>{{details.createTime | dateFormat}}</span>
           </div>
-        </div>
+        </div> -->
         <editorPreview :article="details.content" />
       </div>
     </main>
