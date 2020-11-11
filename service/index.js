@@ -65,7 +65,7 @@ app.use(router.routes())
     .use(serve(path.join(__dirname)))
     .use(router.allowedMethods())
 
-app.listen(3002, () => {
+app.listen(3000, () => {
     console.log('[Server] starting at port 3000')
 })
 
