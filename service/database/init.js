@@ -6,9 +6,10 @@ const { resolve } = require('path')
 exports.initSchemas = () => {
     glob.sync(resolve(__dirname, './schema/', '**/*.js')).forEach(require)
 }
+
 let info = {
-    MONGODB: "mongodb://localhost:27017/blog",
-    MONGONAME: "root",
+    MONGODB: "mongodb://34.92.127.57:27017/blog",
+    MONGONAME: "Amour795",
     MONGOPWD: "Amour795",
 }
 const db = process.env.MONGODB ? 'mongodb://' + process.env.MONGODB + '/blog' : info.MONGODB  //process.env.MONGODB

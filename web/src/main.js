@@ -2,9 +2,9 @@ import Vue from 'vue'
 import App from './App.vue'
 import store from './store'
 import router from './router'
-require('@/assets/styles/reset.scss')
 import 'view-design/dist/styles/iview.css';
 import '@/plugins/iview/index.js';
+require('@/assets/styles/reset.scss')
 
 import * as filters from '@/filters/index'
 Object.keys(filters).forEach(key => {
@@ -18,3 +18,5 @@ new Vue({
   router,
   render: h => h(App)
 }).$mount('#app')
+
+
