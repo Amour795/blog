@@ -17,6 +17,7 @@
         <div class="about-left-right">
           <div class="about-left-right__top">
             <template-box title="AboutMe">
+              <!-- 待补充 -->
             </template-box>
           </div>
           <div class="about-left-right__bottom">
@@ -31,9 +32,11 @@
                    src="../../../assets/imgs/github.png"
                    alt="">
               <p>Amour795</p>
-              <img class="link"
+              <a href="https://github.com/Amour795">
+                 <img class="link"
                    src="../../../assets/imgs/url.png"
                    alt="">
+              </a>
             </template-box>
           </div>
 

@@ -1,28 +1,35 @@
 <template>
-  <div class="calendar">
-    <button @click="switchWeek">切换周日位置</button><br><br>
-    <button @click="switchDateMore">切换显示首尾日期</button><br><br>
-    <button @click="isShowlunar = !isShowlunar">切换显示首尾日期</button>
-    <div>
-      <span @click="switchMonth('upper')">上</span>&nbsp;
-      <span>{{dateFormat(date,'YYYY-MM')}}</span>&nbsp;
-      <span @click="switchMonth('lower')">下</span>&nbsp;
-      <span @click="buildDayList(new Date())">今日</span>
+  <div style="background-color: #a7bfcb;width:100%;height:100%">
+    <div class="calendar">
+      <Button style="margin-right: 12px;"
+              @click="switchWeek">切换周日位置</Button>
+      <Button style="margin-right: 12px;"
+              @click="switchDateMore">切换显示首尾日期</Button>
+      <Button style="margin-right: 12px;"
+              @click="isShowlunar = !isShowlunar">是否显示农历</Button>
+      <div class="handle">
+        <div>
+          <span @click="switchMonth('upper')">上</span>&nbsp;
+          <span>{{dateFormat(date,'YYYY-MM')}}</span>&nbsp;
+          <span @click="switchMonth('lower')">下</span>&nbsp;
+          <span @click="buildDayList(new Date())">今日</span>
+        </div>
+      </div>
+      <div class="week">
+        <p v-for="(item,index) in weekList"
+           :style="{width:`${100/7}%`}"
+           :key="index">{{item}}</p>
+      </div>
+      <ul>
+        <li v-for="(item,index) in dayList"
+            :class="{'now':dateFormat(new Date()) === dateFormat(item.date)}"
+            :key="index"
+            :style="{width:`${100/7}%`}">
+          <p> {{dateFormat(item.date,'D')}}</p>
+          <p v-if="isShowlunar"> {{calendarFormat(item.date)}}</p>
+        </li>
+      </ul>
     </div>
-    <div class="week">
-      <p v-for="(item,index) in weekList"
-         :style="{width:`${100/7}%`}"
-         :key="index">{{item}}</p>
-    </div>
-    <ul>
-      <li v-for="(item,index) in dayList"
-          :class="{'now':dateFormat(new Date()) === dateFormat(item.date)}"
-          :key="index"
-          :style="{width:`${100/7}%`}">
-        <p> {{dateFormat(item.date,'D')}}</p>
-        <p v-if="isShowlunar"> {{calendarFormat(item.date)}}</p>
-      </li>
-    </ul>
   </div>
 </template>
 
@@ -167,10 +174,22 @@ export default {
 <style lang="scss" scoped>
 .calendar {
   width: 1100px;
+  margin: 0 auto;
+  padding-top: 40px;
+}
+.handle {
+  display: flex;
+  justify-content: center;
+  padding: 24px 0;
+  span {
+    cursor: pointer;
+    padding: 4px;
+  }
 }
 .week {
   display: flex;
   flex-wrap: wrap;
+  background: #fff;
   p {
     height: 30px;
     text-align: center;
@@ -182,6 +201,7 @@ ul {
   margin-top: 24px;
   margin: 0;
   padding: 0;
+  background: #fff;
   li {
     height: 120px;
     border: 1px solid #ccc;
@@ -190,7 +210,7 @@ ul {
   }
 }
 .now {
-  span {
+  p {
     background: red;
     border-radius: 50%;
     width: 24px;

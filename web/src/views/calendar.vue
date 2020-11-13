@@ -1,8 +1,8 @@
 <template>
   <div class="calendar">
-    <button @click="switchWeek">切换周日位置</button><br><br>
-    <button @click="switchDateMore">切换显示首尾日期</button><br><br>
-    <button @click="isShowlunar = !isShowlunar">切换显示首尾日期</button>
+    <Button @click="switchWeek">切换周日位置</Button><br><br>
+    <Button @click="switchDateMore">切换显示首尾日期</Button><br><br>
+    <Button @click="isShowlunar = !isShowlunar">是否显示农历</Button>
     <div>
       <span @click="switchMonth('upper')">上</span>&nbsp;
       <span>{{dateFormat(date,'YYYY-MM')}}</span>&nbsp;

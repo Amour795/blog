@@ -39,11 +39,11 @@ export default {
           name: 'ABOUT',
           active: false,
         },
-        // {
-        //   router: 'demo',
-        //   name: 'Demo',
-        //   active: false,
-        // },
+        {
+          router: 'demo',
+          name: '日历Demo',
+          active: false,
+        },
         // {
         //   router: 'login',
         //   name: '登录',

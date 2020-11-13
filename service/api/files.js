@@ -17,7 +17,7 @@ router.post('/uploadFiles',
     try {
       // 上传单个文件
       const file = ctx.request.files.file; // 获取上传文件
-      let newFileName = file.name
+      let newFileName = `${moment(new Date()).format('YYYY-M-D k:m:s')}-${Math.floor(Math.random()*1000)}.${file.name.split('.').pop().toLowerCase()}`
       let filePath = path.join('./upload', newFileName)
       // 创建可读流
       const reader = fs.createReadStream(file.path);
