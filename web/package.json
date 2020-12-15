@@ -16,6 +16,7 @@
     "moment": "^2.29.1",
     "sass": "^1.27.0",
     "sass-loader": "^10.0.4",
+    "vditor": "^3.7.1",
     "view-design": "^4.4.0",
     "vue": "^2.6.11",
     "vue-router": "^3.4.8",

@@ -2,7 +2,7 @@
   <div class="admin-login">
     <!-- <span @click="$router.back()">back</span> -->
     <div class="admin-login__box">
-      <p class="admin-login__box-title">Admin</p>
+      <p class="admin-login__box-title">Login</p>
       <input v-model="userInfo.userName"
              type="text"
              placeholder="用户名"><br>
@@ -49,14 +49,22 @@ export default {
   methods: {
     async submit() {
       let res = await userRegister(this.userInfo)
-      res && this.$Message.success('注册成功')
-      this.login()
+      if (res.state) {
+        this.$Message.success(res.message)
+      } else {
+        this.$Message.error(res.message)
+      }
     },
     async login() {
+      localStorage.removeItem('TOKEN')
       let res = await userLogin(this.userInfo)
       if (res.status) {
+        if (res.isAdmin) {
+          this.$router.push({ name: 'main' })
+        } else {
+          this.$router.back()
+        }
         localStorage.setItem('TOKEN', res.token)
-        this.$router.push({ name: 'main' })
       } else {
         this.$Message.error(res.message)
       }

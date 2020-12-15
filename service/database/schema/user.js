@@ -9,6 +9,7 @@ const userSchema = new Schema({
     UserId: ObjectId,
     userName: { unique: true, type: String },
     password: String,
+    isAdmin: { type: Boolean, default: false },
     createAt: { type: Date, default: Date.now() },
     lastLoginAt: { type: Date, default: Date.now() }
 })

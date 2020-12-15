@@ -7,7 +7,7 @@ router.get('/getArticleList', async (ctx) => {
     try {
         const Article = mongoose.model('Article')
         let result = await Article.find({ publish: false }).exec()
-        ctx.body = result.map(v => {
+        ctx.body = result.sort((a, b) => new Date(b.createTime).getTime() - new Date(a.createTime).getTime()).map(v => {
             return {
                 id: v._id,
                 content: v.content,

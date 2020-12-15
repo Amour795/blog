@@ -1,35 +1,35 @@
 <template>
-  <div class="editor-preview">
-    <mavonEditor v-model="article"
-                 :subfield="false"
-                 :boxShadow="false"
-                 defaultOpen="preview"
-                 :toolbarsFlag="false"  
-                 codeStyle='monokai'/>
+  <div>
+    <div id="vditorPreviewDom"></div>
   </div>
 </template>
 
 <script>
-import { mavonEditor } from 'mavon-editor'
-import 'mavon-editor/dist/css/index.css'
+import VditorPreview from 'vditor/dist/method.min'
+import "vditor/src/assets/scss/index.scss";
 
 export default {
-  name: 'editorPreview',
-
-  components: { mavonEditor },
-
   props: {
     article: {
       type: String
     }
   },
 
+  data() {
+    return {
+      vditorPreviewEl: '',
+      contentEditor: ''
+    }
+  },
+
+  watch: {
+    article(v) {
+      let _vditorPreviewDom = document.getElementById('vditorPreviewDom')
+      _vditorPreviewDom && VditorPreview.preview(_vditorPreviewDom, v)
+    }
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-.editor-preview {
-  margin: auto;
-  height: 100%;
-}
 </style>

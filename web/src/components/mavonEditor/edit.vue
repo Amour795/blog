@@ -1,24 +1,15 @@
-
-
 <template>
-  <div class="editor-writing">
-    <mavonEditor v-model="text"
-                 :ishljs="true"
-                 ref="md"
-                 @imgAdd="$imgAdd"
-                 :toolbars="toolbars" codeStyle='atelier-seaside-dark'/>
+  <div>
+    <div id="vditor"></div>
   </div>
 </template>
 
 <script>
-import { mavonEditor } from 'mavon-editor'
+import Vditor from "vditor";
+import "vditor/src/assets/scss/index.scss";
 import { uploadFiles } from '@api/upload'
-import 'mavon-editor/dist/css/index.css'
-
 export default {
-  name: 'demo',
-
-  components: { mavonEditor },
+  name: '',
 
   model: {
     prop: 'value',
@@ -26,79 +17,61 @@ export default {
   },
 
   props: {
+    height: {
+      type: Number,
+      default: 320
+    },
     value: {
       type: String
     }
   },
 
-  computed: {
-    text: {
-      get() {
-        return this.value
-      },
-      set(v) {
-        this.$emit('change', v)
-      }
+  watch: {
+    value() {
+      this.contentEditor.setValue(this.value)
     }
   },
 
   data() {
     return {
-      toolbars: {
-        bold: true, // 粗体
-        italic: true, // 斜体
-        header: true, // 标题
-        underline: true, // 下划线
-        strikethrough: true, // 中划线
-        mark: true, // 标记
-        superscript: true, // 上角标
-        subscript: true, // 下角标
-        quote: true, // 引用
-        ol: true, // 有序列表
-        ul: true, // 无序列表
-        link: true, // 链接
-        imagelink: true, // 图片链接
-        code: true, // code
-        table: true, // 表格
-        fullscreen: true, // 全屏编辑
-        readmodel: true, // 沉浸式阅读
-        htmlcode: true, // 展示html源码
-        help: true, // 帮助
-        /* 1.3.5 */
-        undo: true, // 上一步
-        redo: true, // 下一步
-        trash: true, // 清空
-        save: true, // 保存（触发events中的save事件）
-        /* 1.4.2 */
-        navigation: true, // 导航目录
-        /* 2.1.8 */
-        alignleft: true, // 左对齐
-        aligncenter: true, // 居中
-        alignright: true, // 右对齐
-        /* 2.2.1 */
-        subfield: true, // 单双栏模式
-        preview: true, // 预览
-      }
-
+      contentEditor: ""
     };
   },
 
+  mounted() {
+    let _this = this
+    this.contentEditor = new Vditor("vditor", {
+      height: _this.height,
+      toolbarConfig: {
+        pin: true,
+        hide:true,
+      },
+      cache: {
+        enable: false
+      },
+      input: (value) => {
+        console.log(value);
+      },
+      upload: {
+        handler: (files) => {
+          var formdata = new FormData();
+          formdata.append('file', files[0]);
+          uploadFiles(formdata).then(res => {
+            let imgUrl = `${process.env.VUE_APP_BASE_URL}${res.url}`
+            _this.contentEditor.insertValue(`![${files[0].name}](${encodeURI(imgUrl)})`)
+          })
+        }
+      }
+    })
+  },
+
   methods: {
-    $imgAdd(pos, $file) {
-      // 第一步.将图片上传到服务器.
-      var formdata = new FormData();
-      formdata.append('file', $file);
-      uploadFiles(formdata).then(res => {
-        this.$refs.md.$img2Url(pos, res.url);
-      })
+    aa() {
+      console.log(this.contentEditor.getValue());
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.editor-writing {
-  margin: auto;
-  height: 100%;
-}
 </style>

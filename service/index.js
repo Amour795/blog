@@ -21,22 +21,20 @@ app.use(cors())
 const Router = require('koa-router')
 let router = new Router();
 
-let user = require('./api/user.js')
-let article = require('./api/article.js');
-let admin = require('./api/admin.js');
-let files = require('./api/files.js');
-router.use('/api/user', user.routes())
-    .use('/api/article', article.routes())
-    .use('/api/admin', admin.routes())
-    .use('/api/files', files.routes())
+
 // jwt 鉴权登录超时
 app.use(async (ctx, next) => {
     var token = ctx.headers.authorization;
     if (token) {
-        let userInfo = jwt.verify(token.split(' ')[1], 'Amour795', () => { })
-        ctx.state = {
-            data: userInfo
-        };
+        await jwt.verify(token.split(' ')[1], 'Amour795', (err, { isAdmin }) => {
+            // if (!isAdmin) {
+            //     ctx.status = 401;
+            //     // ctx.body = {
+            //     //     status: 401,
+            //     //     msg: '您不是系统管理员，没有权限操作'
+            //     // }
+            // }
+        })
     }
     await next();
 })
@@ -60,6 +58,17 @@ app.use(koa_jwt({
 }).unless({
     path: [/\/user/, /\/article/, /\/files/, /\/upload/]
 }));
+
+let user = require('./api/user.js')
+let article = require('./api/article.js');
+let admin = require('./api/admin.js');
+let files = require('./api/files.js');
+let message = require('./api/message.js');
+router.use('/api/user', user.routes())
+    .use('/api/article', article.routes())
+    .use('/api/admin', admin.routes())
+    .use('/api/files', files.routes())
+    .use('/api/message', message.routes())
 
 app.use(router.routes())
     .use(serve(path.join(__dirname)))

@@ -3,6 +3,7 @@ const Schema = mongoose.Schema          //声明Schema
 let ObjectId = Schema.Types.ObjectId    //声明Object类型
 const articleSchema = new Schema({
     articleId: ObjectId,
+    userId: ObjectId,
     title: String,
     createTime: { type: Date, default: Date.now() },
     updateTime: { type: Date, default: Date.now() },

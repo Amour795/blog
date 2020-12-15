@@ -22,7 +22,6 @@ service.interceptors.request.use(
 
 
 // 添加响应拦截器
-// 添加响应拦截器
 service.interceptors.response.use(
   response => {
     return response.data

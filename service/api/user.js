@@ -10,20 +10,33 @@ router.post('/register', async (ctx) => {
     const User = mongoose.model('User')
     //把从前端接收的POST数据封装成一个新的user对象
     let newUser = new User(ctx.request.body)
-    //用mongoose的save方法直接存储，然后判断是否成功，返回相应的结果
-    await newUser.save().then(() => {
-        //成功返回code=200，并返回成功信息
-        ctx.body = {
-            code: 200,
-            message: '注册成功'
-        }
-    }).catch(error => {
-        //失败返回code=500，并返回错误信息
-        ctx.body = {
-            code: 500,
-            message: error
+    let { userName } = ctx.request.body
+    await User.findOne({ userName: userName }).exec().then(async result => {
+        if (result) {
+            ctx.body = {
+                code: 200,
+                state: false,
+                message: '用户名已存在'
+            }
+        } else {
+            //用mongoose的save方法直接存储，然后判断是否成功，返回相应的结果
+            await newUser.save().then(() => {
+                //成功返回code=200，并返回成功信息
+                ctx.body = {
+                    code: 200,
+                    state: true,
+                    message: '注册成功'
+                }
+            }).catch(error => {
+                //失败返回code=500，并返回错误信息
+                ctx.body = {
+                    code: 500,
+                    message: error
+                }
+            })
         }
     })
+
 })
 
 /*登录的实践 */
@@ -46,6 +59,7 @@ router.post('/login', async (ctx) => {
                         const userToken = {
                             userName: result.userName,
                             userId: result._id,
+                            isAdmin: result.isAdmin,
                             date: new Date().getTime()
                         }
                         // 签发Token 1小时后过期
@@ -53,6 +67,7 @@ router.post('/login', async (ctx) => {
                         jwt.sign({}, 'Amour795')
                         ctx.body = {
                             userName: result.userName,
+                            isAdmin: result.isAdmin,
                             userId: result._id,
                             status: isMatch,
                             token: token
@@ -67,11 +82,11 @@ router.post('/login', async (ctx) => {
                     ctx.body = { code: 200, status: false, message: error }
                 })
         } else {
-            ctx.body = { code: 200, message: '用户名不存在' }
+            !result.isAdmin && (ctx.body = { code: 200, message: '您不是管理员' })
         }
 
-    }).catch(error => {
-        ctx.body = { code: 500, message: error }
+    }).catch(() => {
+        ctx.body = { code: 500, message: '用户名不存在' }
     })
 })
 

@@ -9,8 +9,8 @@
                placeholder="标题" />
       </FormItem>
       <FormItem label="标题">
-        <div style="height: 320px;overflow-y: scroll;box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 12px 0px;">
-          <editorEdit v-model="formData.content" />
+        <div style="height: 320px;z-index: 999;position: relative;">
+          <editorEdit v-model="formData.content"  :height='320'/>
         </div>
       </FormItem>
       <FormItem label="标题">
