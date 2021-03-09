@@ -59,16 +59,19 @@ app.use(koa_jwt({
     path: [/\/user/, /\/article/, /\/files/, /\/upload/]
 }));
 
-let user = require('./api/user.js')
-let article = require('./api/article.js');
-let admin = require('./api/admin.js');
-let files = require('./api/files.js');
-let message = require('./api/message.js');
+let user = require('./api/user.js'),
+    article = require('./api/article.js'),
+    admin = require('./api/admin.js'),
+    files = require('./api/files.js'),
+    message = require('./api/message.js'),
+    movie = require('./api/movie.js')
+
 router.use('/api/user', user.routes())
     .use('/api/article', article.routes())
     .use('/api/admin', admin.routes())
     .use('/api/files', files.routes())
     .use('/api/message', message.routes())
+    .use('/api/movie', movie.routes())
 
 app.use(router.routes())
     .use(serve(path.join(__dirname)))

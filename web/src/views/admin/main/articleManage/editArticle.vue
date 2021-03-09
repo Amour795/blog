@@ -56,6 +56,7 @@ export default {
   methods: {
     handleSubmit(publish) {
       this.formData.publish = publish
+      console.log(this.formData.content);
       saveBlog(this.formData).then(res => {
         res && this.$Message.success('文章发布成功');
       })

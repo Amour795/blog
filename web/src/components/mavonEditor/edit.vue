@@ -42,8 +42,15 @@ export default {
     let _this = this
     this.contentEditor = new Vditor("vditor", {
       height: _this.height,
+      toolbarConfig: {
+        // pin: true,
+        // hide:true,
+      },
       cache: {
         enable: false
+      },
+      input: (value) => {
+        this.$emit('change',value)
       },
       upload: {
         handler: (files) => {

@@ -8,7 +8,7 @@ exports.initSchemas = () => {
 }
 
 let info = {
-    MONGODB: "mongodb://34.92.127.57:27017/blog",
+    MONGODB: "mongodb://34.92.168.248:27017/blog",
     MONGONAME: "Amour795",
     MONGOPWD: "Amour795",
 }
