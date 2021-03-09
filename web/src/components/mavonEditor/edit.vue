@@ -42,15 +42,8 @@ export default {
     let _this = this
     this.contentEditor = new Vditor("vditor", {
       height: _this.height,
-      toolbarConfig: {
-        pin: true,
-        hide:true,
-      },
       cache: {
         enable: false
-      },
-      input: (value) => {
-        console.log(value);
       },
       upload: {
         handler: (files) => {
@@ -63,12 +56,6 @@ export default {
         }
       }
     })
-  },
-
-  methods: {
-    aa() {
-      console.log(this.contentEditor.getValue());
-    }
   }
 };
 </script>

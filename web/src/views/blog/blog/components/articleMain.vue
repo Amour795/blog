@@ -7,7 +7,7 @@
       <div>
         <editorPreview :article="details.content" />
       </div>
-      <div class="msg-Info"
+      <!-- <div class="msg-Info"
            style="margin-top: 24px;">
         <Input v-model="msgInfo.content"
                type="textarea"
@@ -29,7 +29,7 @@
             </p>
           </li>
         </ul>
-      </div>
+      </div> -->
     </main>
   </div>
 </template>
@@ -37,7 +37,7 @@
 <script>
 import editorPreview from '@components/mavonEditor/preview'
 import { getArticleById } from '@api/blog'
-import { saveMessage, getMessageList } from '@api/message'
+// import { saveMessage, getMessageList } from '@api/message'
 export default {
   name: 'articleList',
 
@@ -69,20 +69,21 @@ export default {
       getArticleById({ id: indo.id }).then(res => {
         this.details = res
         this.msgInfo.articleId = res.id
-        this.getMessageList()
+        // this.getMessageList()
       })
     },
-    async save() {
-      await saveMessage({ ...this.msgInfo })
-      this.$Message.success('保存成功')
-      this.getMessageList()
-      this.msgInfo.content = ''
-    },
-    getMessageList() {
-      getMessageList(this.msgInfo.articleId).then(res => {
-        this.msgList = res
-      })
-    }
+    // async save() {
+    //   await saveMessage({ ...this.msgInfo })
+    //   this.$Message.success('保存成功')
+    //   this.getMessageList()
+    //   this.msgInfo.content = ''
+    // },
+    // getMessageList() {
+    //   getMessageList(this.msgInfo.articleId).then(res => {
+    //     console.log(res);
+    //     this.msgList = res
+    //   })
+    // }
   },
 
   watch: {

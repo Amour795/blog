@@ -59,11 +59,7 @@ export default {
       localStorage.removeItem('TOKEN')
       let res = await userLogin(this.userInfo)
       if (res.status) {
-        if (res.isAdmin) {
-          this.$router.push({ name: 'main' })
-        } else {
-          this.$router.back()
-        }
+        this.$router.push({ name: 'main' })
         localStorage.setItem('TOKEN', res.token)
       } else {
         this.$Message.error(res.message)

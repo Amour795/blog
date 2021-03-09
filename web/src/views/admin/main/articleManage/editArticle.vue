@@ -10,7 +10,8 @@
       </FormItem>
       <FormItem label="标题">
         <div style="height: 320px;z-index: 999;position: relative;">
-          <editorEdit v-model="formData.content"  :height='320'/>
+          <editorEdit v-model="formData.content"
+                      :height='320' />
         </div>
       </FormItem>
       <FormItem label="标题">
@@ -24,8 +25,12 @@
                   :key="item.value">{{ item.label }}</Option>
         </Select>
       </FormItem>
-      <Button @click="handleSubmit(false)">发布</Button>
-      <Button @click="handleSubmit(true )">存草稿</Button>
+      <FormItem label="">
+        <Button style="margin-right: 12px;"
+                type="primary"
+                @click="handleSubmit(false)">发布</Button>
+        <Button @click="handleSubmit(true )">存草稿</Button>
+      </FormItem>
     </Form>
   </div>
 </template>
