@@ -8,7 +8,11 @@ router.get('/getList', async (ctx) => {
     let { page = 1, size = 12 } = ctx.request.query
     let options = { limit: Number(size), skip: (page - 1) * size };
     let result = await Movie.find({}).skip(options.skip).limit(options.limit)
-    ctx.body = result
+    let total = await Movie.find({}).count()
+    ctx.body = {
+      list:result,
+      total:total
+    }
   } catch (error) {
     ctx.body = {
       code: 500,

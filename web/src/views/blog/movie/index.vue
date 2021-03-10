@@ -10,7 +10,9 @@
       </li>
     </ul>
     <div class="movie-page">
-      <Page :total="100" @on-change="getList"/>
+      <Page :total="total"
+            :page-size="size"
+            @on-change="getList" />
     </div>
   </div>
 </template>
@@ -24,7 +26,9 @@ export default {
 
   data() {
     return {
-      movieList: []
+      movieList: [],
+      total: 0,
+      size: 20,
     };
   },
   created() {
@@ -44,9 +48,9 @@ export default {
 
   methods: {
     getList(page) {
-      getMovieList({ page: page, size: 20 }).then(res => {
-        this.movieList = res
-        console.log(132);
+      getMovieList({ page: page, size: this.size }).then(res => {
+        this.movieList = res.list
+        this.total = res.total
       })
     },
     getDetails() {
@@ -85,9 +89,9 @@ export default {
       }
     }
   }
-  &-page{
+  &-page {
     text-align: center;
-    padding:62px 0;
+    padding: 62px 0;
   }
 }
 </style>
