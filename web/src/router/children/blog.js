@@ -23,5 +23,11 @@ export default {
       name: 'about',
       component: () => import('@views/blog/about/index.vue'),
     },
+    {
+      path: '/movie',
+      name: 'movie',
+      component: () => import('@views/blog/movie/index.vue'),
+    },
+
   ]
 }

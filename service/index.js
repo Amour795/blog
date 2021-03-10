@@ -56,7 +56,7 @@ app.use(async (ctx, next) => {
 app.use(koa_jwt({
     secret: 'Amour795'
 }).unless({
-    path: [/\/user/, /\/article/, /\/files/, /\/upload/]
+    path: [/\/user/, /\/article/, /\/movie/, /\/files/, /\/upload/]
 }));
 
 let user = require('./api/user.js'),

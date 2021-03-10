@@ -18,7 +18,6 @@
 
 <script>
 import { getArticleList } from '@api/blog.js'
-import { getMovieList, getMovieDetails } from '@api/movie.js'
 
 export default {
   name: 'articleList',
@@ -35,14 +34,6 @@ export default {
       this.articleList = res
       this.select(res[0])
     })
-    getMovieList().then(res => {
-      console.log(res);
-    })
-    getMovieDetails().then(res => {
-      console.log(res);
-    })
-
-
   },
 
   methods: {

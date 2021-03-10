@@ -34,11 +34,11 @@ export default {
           name: '博客',
           active: false,
         },
-        // {
-        //   router: 'about',
-        //   name: 'ABOUT',
-        //   active: false,
-        // },
+        {
+          router: 'movie',
+          name: '电影',
+          active: false,
+        },
         // {
         //   router: 'demo',
         //   name: '日历Demo',
