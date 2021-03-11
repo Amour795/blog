@@ -2,16 +2,16 @@
   <div class="admin-login">
     <!-- <span @click="$router.back()">back</span> -->
     <div class="admin-login__box">
-      <p class="admin-login__box-title">Admin</p>
+      <p class="admin-login__box-title">Login</p>
       <input v-model="userInfo.userName"
              type="text"
              placeholder="用户名"><br>
       <input v-model="userInfo.password"
-             type="text"
+             type="password"
              placeholder="密码"><br>
       <div class="admin-login__box-btn">
         <button @click="$router.push({name:'home'})">离开</button>
-        <!-- <button @click="submit">注册</button> -->
+        <button @click="submit">注册</button>
         <button @click="login">登录</button>
       </div>
     </div>
@@ -49,15 +49,20 @@ export default {
   methods: {
     async submit() {
       let res = await userRegister(this.userInfo)
-      console.log(res);
+      if (res.state) {
+        this.$Message.success(res.message)
+      } else {
+        this.$Message.error(res.message)
+      }
     },
     async login() {
+      localStorage.removeItem('TOKEN')
       let res = await userLogin(this.userInfo)
       if (res.status) {
-        localStorage.setItem('TOKEN', res.token)
         this.$router.push({ name: 'main' })
-      }else{
-          this.$Message.error(res.message)
+        localStorage.setItem('TOKEN', res.token)
+      } else {
+        this.$Message.error(res.message)
       }
     }
   }

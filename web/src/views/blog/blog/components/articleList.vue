@@ -7,9 +7,8 @@
       <div class="article"
            v-for="(item,index) in articleList"
            :key="index"
-           @click="select(item)" 
-           :style="{'background':article.id === item.id ? '#F0ECBC':''}"
-           >
+           @click="select(item)"
+           :style="{'background':article.id === item.id ? '#F0ECBC':''}">
         <h3 class="article__title">@{{item.title}}</h3>
         <p class="article__time">{{item.createTime | dateFormat}}</p>
       </div>
@@ -26,7 +25,7 @@ export default {
   data() {
     return {
       articleList: [],
-      article:{}
+      article: {}
     };
   },
 
@@ -38,9 +37,9 @@ export default {
   },
 
   methods: {
-    select(item){
+    select(item) {
       this.article = item
-      this.$emit('select',item)
+      this.$emit('select', item)
     }
   },
 };
@@ -64,17 +63,17 @@ export default {
     font-family: NewFont;
     font-weight: bold;
     font-size: 18px;
-    color:#333;
+    color: #333;
   }
   main {
     background: #ffffff;
     height: calc(100% - 40px);
     overflow-y: scroll;
-    padding:8px;
+    padding: 8px;
     .article {
       padding: 12px;
       cursor: pointer;
-          border-radius: 14px;
+      border-radius: 14px;
       &__title {
         font-family: NewFont;
         font-size: 18px;

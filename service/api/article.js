@@ -6,8 +6,8 @@ const mongoose = require('mongoose')
 router.get('/getArticleList', async (ctx) => {
     try {
         const Article = mongoose.model('Article')
-        let result = await Article.find().exec()
-        ctx.body = result.map(v => {
+        let result = await Article.find({ publish: false }).exec()
+        ctx.body = result.sort((a, b) => new Date(b.createTime).getTime() - new Date(a.createTime).getTime()).map(v => {
             return {
                 id: v._id,
                 content: v.content,
@@ -15,7 +15,7 @@ router.get('/getArticleList', async (ctx) => {
                 updateTime: v.updateTime,
                 imgList: v.imgList,
                 tag: v.tag,
-                title: v.title,
+                title: v.title
             }
         })
     } catch (error) {
@@ -36,12 +36,14 @@ router.get('/getArticleById', async (ctx) => {
                 updateTime: v.updateTime,
                 imgList: v.imgList,
                 tag: v.tag,
-                title: v.title,
+                title: v.title
             }
         })[0]
     } catch (error) {
         ctx.body = { code: 500, message: err }
     }
 })
+
+
 
 module.exports = router;

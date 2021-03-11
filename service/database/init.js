@@ -1,16 +1,32 @@
+
 const mongoose = require('mongoose')
-const db = "mongodb://localhost/smile-db"
 const glob = require('glob')
 const { resolve } = require('path')
 //引入所有的Schema文件
 exports.initSchemas = () => {
     glob.sync(resolve(__dirname, './schema/', '**/*.js')).forEach(require)
 }
+
+let info = {
+    MONGODB: "mongodb://34.92.168.248:27017/blog",
+    MONGONAME: "Amour795",
+    MONGOPWD: "Amour795",
+}
+const db = process.env.MONGODB ? 'mongodb://' + process.env.MONGODB + '/blog' : info.MONGODB  //process.env.MONGODB
+let options = {
+    authSource: 'admin',
+    auto_reconnect: true,
+    user: process.env.MONGONAME || info.MONGONAME, // process.env.MONGONAME,
+    pass: process.env.MONGOPWD || info.MONGOPWD,// process.env.MONGOPWD,
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true
+}
+
 //连接数据库
 exports.connect = () => {
     //连接数据库
-    mongoose.set('useCreateIndex', true) //加上这个
-    mongoose.connect(db, { useNewUrlParser: true })
+    mongoose.connect(db, options)
 
     let maxConnectTimes = 0
 
@@ -22,7 +38,7 @@ exports.connect = () => {
             console.log('***********数据库断开***********')
             if (maxConnectTimes < 3) {
                 maxConnectTimes++
-                mongoose.connect(db)
+                mongoose.connect(db, options)
             } else {
                 reject()
                 throw new Error('数据库出现问题，程序无法搞定，请人为修理......')
@@ -34,7 +50,7 @@ exports.connect = () => {
             console.log('***********数据库错误***********')
             if (maxConnectTimes < 3) {
                 maxConnectTimes++
-                mongoose.connect(db)
+                mongoose.connect(db, options)
             } else {
                 reject(err)
                 throw new Error('数据库出现问题，程序无法搞定，请人为修理......')

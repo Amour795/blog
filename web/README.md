@@ -1,1 +1,2 @@
-项目开发阶段
+##### Docker打包命令
+`npm run build:docker`

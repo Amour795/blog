@@ -1,10 +1,13 @@
 {
-  "name": "koa2",
+  "name": "koa2-blog",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index",
+    "build:docker": "docker build -t amour795/koa2 .",
+    "run:docker": "docker run -p 3000:3000 --env MONGODB=127.0.0.1:27017 --env  MONGONAME=Amour795 --env  MONGOPWD=Amour795 -v /Users/amour795/Desktop/img:/app/upload -d --name koa2  amour795/koa2"
   },
   "keywords": [],
   "author": "",
@@ -14,10 +17,13 @@
     "glob": "^7.1.6",
     "jsonwebtoken": "^8.5.1",
     "koa": "^2.13.0",
+    "koa-body": "^4.2.0",
     "koa-bodyparser": "^4.3.0",
     "koa-jwt": "^4.0.0",
     "koa-router": "^9.4.0",
+    "koa-static": "^5.0.0",
     "koa2-cors": "^2.0.6",
-    "mongoose": "^5.10.11"
+    "mongoose": "^5.10.11",
+    "moment": "^2.29.1"
   }
 }

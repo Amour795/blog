@@ -1,8 +1,6 @@
 
 <template>
   <div class="blog-home">
-    <!-- <button @click="go('login')">login</button>
-    <button @click="go('calendar')">calendar</button> -->
     <div class="blog-home-welcome-msg">
       <span>Hey There</span><br>
       <span>I'm Amour 795</span><br>
@@ -27,6 +25,7 @@
         <span>鄂ICP备20013875号</span>
       </li>
     </ul>
+     
   </div>
 </template>
 

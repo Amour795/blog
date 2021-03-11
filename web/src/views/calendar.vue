@@ -1,8 +1,8 @@
 <template>
   <div class="calendar">
-    <button @click="switchWeek">切换周日位置</button><br><br>
-    <button @click="switchDateMore">切换显示首尾日期</button><br><br>
-    <button @click="isShowlunar = !isShowlunar">切换显示首尾日期</button>
+    <Button @click="switchWeek">切换周日位置</Button><br><br>
+    <Button @click="switchDateMore">切换显示首尾日期</Button><br><br>
+    <Button @click="isShowlunar = !isShowlunar">是否显示农历</Button>
     <div>
       <span @click="switchMonth('upper')">上</span>&nbsp;
       <span>{{dateFormat(date,'YYYY-MM')}}</span>&nbsp;
@@ -130,7 +130,6 @@ export default {
       const week = Number(new Date(`${year}/${month}/1`).getDay())
       // 周日显示在前面还是后面
       const front = this.weekType ? week : week ? week - 1 : 6
-      console.log(front);
       // 后面天数取余数
       const behind = (days + front) % 7 ? 7 - (days + front) % 7 : 0
       // 沾满所有格子所需的天数 加上前面和后面的天数

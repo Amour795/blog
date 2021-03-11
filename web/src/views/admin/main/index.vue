@@ -60,7 +60,6 @@ export default {
   watch: {},
 
   created() { 
-    console.log();
   },
 
   methods: {}
@@ -81,8 +80,8 @@ export default {
     font-family: NewFont;
     border-bottom: 1px solid #d9d9d9;
   }
-  main {
-    height: 100%;
+  main {    
+    height: calc(100% - 40px);
     display: flex;
   }
   ::v-deep .ivu-menu {

@@ -9,8 +9,9 @@
                placeholder="标题" />
       </FormItem>
       <FormItem label="标题">
-        <div style="height: 320px;overflow-y: scroll;box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 12px 0px;">
-          <editorEdit v-model="formData.content" />
+        <div style="height: 320px;z-index: 999;position: relative;">
+          <editorEdit v-model="formData.content"
+                      :height='320' />
         </div>
       </FormItem>
       <FormItem label="标题">
@@ -24,8 +25,12 @@
                   :key="item.value">{{ item.label }}</Option>
         </Select>
       </FormItem>
-      <Button @click="handleSubmit">发布</Button>
-      <Button>存草稿</Button>
+      <FormItem label="">
+        <Button style="margin-right: 12px;"
+                type="primary"
+                @click="handleSubmit(false)">发布</Button>
+        <Button @click="handleSubmit(true )">存草稿</Button>
+      </FormItem>
     </Form>
   </div>
 </template>
@@ -42,14 +47,16 @@ export default {
         title: '',
         content: '',
         tag: [],
-        imgList: [2, 2, 2, 2],
-        mainImg: '11',
-        thumbnail: '11'
+        mainImg: '',
+        thumbnail: '',
+        publish: false
       }
     }
   },
   methods: {
-    handleSubmit() {
+    handleSubmit(publish) {
+      this.formData.publish = publish
+      console.log(this.formData.content);
       saveBlog(this.formData).then(res => {
         res && this.$Message.success('文章发布成功');
       })
@@ -62,14 +69,8 @@ export default {
     },
     getInfo() {
       getArticleById({ id: this.$route.query.id }).then(res => {
-        this.formData = {
-          title: res.title,
-          content: res.content,
-          tag: res.tag,
-          imgList: res.imgList,
-          mainImg: res.mainImg,
-          thumbnail: res.thumbnail
-        }
+        if (!res) return
+        this.formData = res
         this.list = res.tag.map(v => {
           return {
             value: v,

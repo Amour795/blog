@@ -4,6 +4,7 @@
       <ul class="blog-header__content-nav">
         <li v-for="(item,index) in navList"
             :key="index"
+            :class="{'active':item.router === $route.name}"
             @click="goTo(item)">{{item.name}}</li>
       </ul>
       <div class="blog-header__content-time"
@@ -34,20 +35,20 @@ export default {
           active: false,
         },
         {
-          router: 'about',
-          name: '关于',
+          router: 'movie',
+          name: '电影',
           active: false,
         },
-        {
-          router: 'demo',
-          name: 'Demo',
-          active: false,
-        },
-        {
-          router: 'login',
-          name: '登录',
-          active: false,
-        }
+        // {
+        //   router: 'demo',
+        //   name: '日历Demo',
+        //   active: false,
+        // },
+        // {
+        //   router: 'login',
+        //   name: '登录',
+        //   active: false,
+        // }
       ],
       disabled: false,
       hour: -1,
@@ -102,6 +103,19 @@ export default {
         cursor: pointer;
         padding: 0 12px;
         line-height: 38px;
+        position: relative;
+      }
+      .active::after{
+        position: absolute;
+        content: '';
+        background: rgb(240, 236, 188);
+        width: 26px;
+        height: 26px;
+        z-index: -1;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        border-radius: 50%;
       }
     }
     &-time {

@@ -23,7 +23,7 @@ export default {
     return {
       isTransition: false,
       list: [
-        '1.2s', '1.4s', '1.6', '1.2s', '1.4s', '1.2s', '1.6s', '1.4s', '1.2s', '1.2s'
+        '1.6s', '1.5s', '1.6', '1.5s', '1.6s', '1.6s', '1.5s', '1.5s', '1.6s', '1.5s'
       ]
     }
   },
@@ -79,7 +79,7 @@ export default {
     height: 10%;
     width: 100%;
     left: -100%;
-    animation: mymove 1.2s;
+    animation: mymove 1.6s;
     animation-fill-mode: both;
   }
   @keyframes mymove {
