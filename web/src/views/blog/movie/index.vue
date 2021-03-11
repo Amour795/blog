@@ -3,11 +3,12 @@
     <ul class="movie-list grid">
       <li class="movie-list-item grid-item"
           v-for="item in movieList"
-          @click="getDetails(item.id)"
+          @click="getDetails(item)"
           :key="item._id">
         <img :src="item.imgSrc"
              alt="">
         <p>{{item.name}} <span>{{item.grade}}</span> </p>
+
         <div class="movie-list-item__mask">
           <p>剧名&nbsp;&nbsp;:&nbsp;&nbsp;{{item.name}}</p>
           <p>豆瓣评分&nbsp;&nbsp;:&nbsp;&nbsp;{{item.grade}}</p>
@@ -24,6 +25,43 @@
             :page-size="size"
             @on-change="getList" />
     </div>
+    <Modal v-model="movieDetailsModal"
+           footer-hide
+           width="920">
+      <div v-if="movieDetails">
+        <div class="movie-details-modal">
+          <div>
+            <img :src="movieDetails.imgSrc"
+                 alt="">
+          </div>
+          <div>
+            <p>剧名&nbsp;&nbsp;:&nbsp;&nbsp;{{movieDetails.title}}<span>{{movieDetails.doubanScore}}</span></p>
+            <p>别名&nbsp;&nbsp;:&nbsp;&nbsp;{{movieDetails.AlsoknownAs.join('、')}}</p>
+            <p>主演&nbsp;&nbsp;:&nbsp;&nbsp;{{movieDetails.toStar.join('、')}}</p>
+            <p>时长&nbsp;&nbsp;:&nbsp;&nbsp;{{movieDetails.duration.join('、')}}</p>
+            <p>国家&nbsp;&nbsp;:&nbsp;&nbsp;{{movieDetails.showArea.join('、')}}</p>
+            <p>类型&nbsp;&nbsp;:&nbsp;&nbsp;{{movieDetails.typs.join('、')}}</p>
+            <p>上映年份&nbsp;&nbsp;:&nbsp;&nbsp;{{movieDetails.year.join('、')}}</p>
+            <p>更新时间&nbsp;&nbsp;:&nbsp;&nbsp;{{new Date(movieDetails.updateTime)}}</p>
+          </div>
+          <div>
+            <p v-for="(item,index) in movieDetails.info"
+               :key="`movieDetails-${index}`">
+              {{item}}
+            </p>
+          </div>
+        </div>
+        <ul class="movie-details-magnetic">
+          <li v-for="(item,index) in movieDetails.magnetic"
+              :key="`magnetic-${index}`"
+              v-clipboard:copy="item.href"
+              v-clipboard:success="onCopy">
+            <p>{{item.name}}</p>
+            <p>{{item.href}}</p>
+          </li>
+        </ul>
+      </div>
+    </Modal>
   </div>
 </template>
 
@@ -36,7 +74,9 @@ export default {
 
   data() {
     return {
+      movieDetailsModal: false,
       movieList: [],
+      movieDetails: null,
       total: 0,
       size: 20,
     };
@@ -63,10 +103,19 @@ export default {
         this.total = res.total
       })
     },
-    getDetails(id) {
+    getDetails({ id, imgSrc }) {
+
       getMovieDetails({ id: id }).then(res => {
-        console.log(res.title);
+        this.movieDetails = {
+          ...res,
+          info: res.info.split('　　').filter(item => item),
+          imgSrc: imgSrc
+        }
+        this.movieDetailsModal = true
       })
+    },
+    onCopy() {
+      this.$Message.success('复制链接成功')
     }
   },
 };
@@ -78,6 +127,7 @@ export default {
   padding: 32px;
   background-color: #a7bfcb;
   overflow-y: auto;
+  color: #333;
   &-list {
     width: 1200px;
     margin: 0 auto;
@@ -145,6 +195,70 @@ export default {
   &-page {
     text-align: center;
     padding: 62px 0;
+  }
+}
+::v-deep .ivu-modal {
+  height: 80%;
+  overflow-y: auto;
+  color: #333;
+}
+::v-deep .ivu-modal-body {
+  .movie-details-modal {
+    display: flex;
+    justify-content: space-between;
+    text-align-last: left;
+    div {
+      padding: 12px;
+    }
+    div:nth-child(1) {
+      width: 300px;
+      flex: none;
+
+      img {
+        width: 100%;
+      }
+    }
+    div:nth-child(2) {
+      width: 300px;
+      flex: none;
+      font-size: 14px;
+      font-weight: bold;
+      p {
+        margin-bottom: 14px;
+        span {
+          height: 22px;
+          line-height: 22px;
+          border-radius: 4px;
+          background: #f0ecbc;
+          padding: 0 8px;
+          color: #333;
+          font-size: 12px;
+          display: inline-block;
+          margin-left: 12px;
+        }
+      }
+    }
+    div:nth-child(3) {
+      width: 100%;
+      p {
+        text-indent: 2em;
+      }
+    }
+  }
+  .movie-details-magnetic {
+    width: 600px;
+    margin: 0 auto;
+    li {
+      margin: 24px 0;
+      text-align: center;
+      background: #ededed;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      p {
+        padding: 6px;
+      }
+    }
   }
 }
 </style>
