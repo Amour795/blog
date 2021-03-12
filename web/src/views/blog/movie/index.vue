@@ -104,7 +104,6 @@ export default {
       })
     },
     getDetails({ id, imgSrc }) {
-
       getMovieDetails({ id: id }).then(res => {
         this.movieDetails = {
           ...res,

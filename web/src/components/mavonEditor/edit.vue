@@ -27,14 +27,18 @@ export default {
   },
 
   watch: {
-    value() {
-      this.contentEditor.setValue(this.value)
+    value(v) {
+      if (this.flag) {
+        this.flag = false
+        this.contentEditor.setValue(v)
+      }
     }
   },
 
   data() {
     return {
-      contentEditor: ""
+      contentEditor: null,
+      flag: true
     };
   },
 
@@ -43,8 +47,7 @@ export default {
     this.contentEditor = new Vditor("vditor", {
       height: _this.height,
       toolbarConfig: {
-        // pin: true,
-        // hide:true,
+        pin: true,
       },
       cache: {
         enable: false
