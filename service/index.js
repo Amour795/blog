@@ -26,14 +26,8 @@ let router = new Router();
 app.use(async (ctx, next) => {
     var token = ctx.headers.authorization;
     if (token) {
-        await jwt.verify(token.split(' ')[1], 'Amour795', (err, { isAdmin }) => {
-            // if (!isAdmin) {
-            //     ctx.status = 401;
-            //     // ctx.body = {
-            //     //     status: 401,
-            //     //     msg: '您不是系统管理员，没有权限操作'
-            //     // }
-            // }
+        await jwt.verify(token.split(' ')[1], 'Amour795', (err) => {
+
         })
     }
     await next();
