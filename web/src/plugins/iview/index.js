@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { Menu, MenuItem,Submenu,FormItem,Form,Input,Select,Option,Button,Icon ,Message,Table,Tag,Upload,Poptip,Page,Modal} from 'view-design';
+import { Menu, MenuItem,Submenu,FormItem,Form,Input,Select,Option,Button,Icon ,Message,Table,Tag,Upload,Poptip,Page,Modal,InputNumber} from 'view-design';
 Vue.component('Menu', Menu);
 Vue.component('MenuItem', MenuItem);
 Vue.component('Submenu', Submenu);
@@ -16,6 +16,7 @@ Vue.component('Upload', Upload);
 Vue.component('Poptip', Poptip);
 Vue.component('Page', Page);
 Vue.component('Modal', Modal);
+Vue.component('InputNumber', InputNumber);
 
 
 Vue.prototype.$Message = Message

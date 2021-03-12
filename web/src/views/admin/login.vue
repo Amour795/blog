@@ -10,8 +10,8 @@
              type="password"
              placeholder="密码"><br>
       <div class="admin-login__box-btn">
-        <button @click="$router.push({name:'home'})">离开</button>
-        <button @click="submit">注册</button>
+        <!-- <button @click="$router.push({name:'home'})">离开</button> -->
+        <!-- <button @click="submit">注册</button> -->
         <button @click="login">登录</button>
       </div>
     </div>

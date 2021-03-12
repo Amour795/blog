@@ -7,6 +7,7 @@ export const getMovieList = data =>
 export const getMovieDetails = data =>
   axios.get('/api/movie/getDetails', data)
 
-
+  export const updateMovie = data =>
+  axios.get('/api/movie/update', data)
 
 

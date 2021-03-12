@@ -42,7 +42,7 @@
             <p>国家&nbsp;&nbsp;:&nbsp;&nbsp;{{movieDetails.showArea.join('、')}}</p>
             <p>类型&nbsp;&nbsp;:&nbsp;&nbsp;{{movieDetails.typs.join('、')}}</p>
             <p>上映年份&nbsp;&nbsp;:&nbsp;&nbsp;{{movieDetails.year.join('、')}}</p>
-            <p>更新时间&nbsp;&nbsp;:&nbsp;&nbsp;{{new Date(movieDetails.updateTime)}}</p>
+            <p>更新时间&nbsp;&nbsp;:&nbsp;&nbsp;{{movieDetails.updateTime | dateFormat}}</p>
           </div>
           <div>
             <p v-for="(item,index) in movieDetails.info"
